@@ -72,9 +72,9 @@ export function MobileMenu() {
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen(true)}
-        className="-mr-1 flex size-10 items-center justify-center justify-self-end rounded-btn text-ink transition-colors hover:bg-surface-side lg:hidden"
+        className="-mr-[6.5px] flex size-10 items-center justify-center justify-self-end rounded-btn text-ink transition-colors hover:bg-surface-side lg:hidden"
       >
-        <MenuIcon className="h-6 w-[26px]" />
+        <MenuIcon className="h-[17px] w-[18px]" />
       </button>
 
       <div
@@ -100,7 +100,7 @@ export function MobileMenu() {
             open ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex items-center justify-between px-6 pt-7 pb-[21px]">
+          <div className="flex items-center justify-between pr-4 pl-6 pt-7 pb-[21px]">
             <a
               href="#top"
               aria-label="FlowPilot home"
@@ -114,7 +114,7 @@ export function MobileMenu() {
               type="button"
               aria-label="Close menu"
               onClick={() => close(true)}
-              className="flex size-10 items-center justify-center rounded-full text-menu-ink transition-colors hover:bg-surface-side"
+              className="flex size-10 items-center justify-center rounded-full text-menu-close transition-colors hover:bg-surface-side"
             >
               <CloseIcon className="size-5" />
             </button>
@@ -127,7 +127,7 @@ export function MobileMenu() {
                   <a
                     href={item.href}
                     onClick={() => close(false)}
-                    className="flex items-center justify-between rounded-xl p-[14px] text-[16.8px]/[25.2px] font-semibold text-menu-ink transition-colors hover:bg-surface-side"
+                    className="flex min-h-[54px] items-center justify-between rounded-xl p-[14px] text-[16.8px]/[25.2px] font-semibold text-menu-ink transition-colors hover:bg-surface-side"
                   >
                     {item.mobileLabel ?? item.label}
                     <ChevronRightIcon className="size-4 text-menu-icon" />
@@ -141,14 +141,14 @@ export function MobileMenu() {
             <a
               href={loginHref}
               onClick={() => close(false)}
-              className="rounded-xl border border-menu-line bg-white py-[15px] text-center text-[15.7px] font-semibold text-menu-ink transition-colors hover:bg-surface-side"
+              className="flex h-[54px] items-center justify-center rounded-xl border border-menu-line bg-white text-center text-[15.7px] font-semibold text-menu-ink transition-colors hover:bg-surface-side"
             >
               Log In
             </a>
             <a
               href={startHref}
               onClick={() => close(false)}
-              className="rounded-xl bg-[linear-gradient(to_right,#5b47fb,#4f46e5)] py-[14px] text-center text-[15.7px] font-semibold text-white shadow-[0_1px_1px_#c7d2fd] transition hover:brightness-110"
+              className="flex h-[52px] items-center justify-center rounded-xl bg-[linear-gradient(to_right,#5b47fb,#4f46e5)] text-center text-[15.7px] font-semibold text-white shadow-[0_1px_1px_#c7d2fd] transition hover:brightness-110"
             >
               Start Free
             </a>

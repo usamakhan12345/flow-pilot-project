@@ -7,10 +7,11 @@ export const dashboardNav = [
   "Settings",
 ] as const;
 
+/** `shortLabel` is the compact copy used by the mobile mockup (Figma 2:1005). */
 export const dashboardStats = [
-  { value: "12", label: "Active Tasks" },
-  { value: "4", label: "AI Suggestions" },
-  { value: "85%", label: "Project Progress" },
+  { value: "12", label: "Active Tasks", shortLabel: "Active Tasks" },
+  { value: "4", label: "AI Suggestions", shortLabel: "AI Suggest." },
+  { value: "85%", label: "Project Progress", shortLabel: "Progress" },
 ] as const;
 
 export type TaskStatus = "In Progress" | "Completed" | "Upcoming";
@@ -21,9 +22,13 @@ export const taskStatusColor: Record<TaskStatus, string> = {
   Upcoming: "text-subtle",
 };
 
-export const dashboardTasks: { title: string; status: TaskStatus }[] = [
-  { title: "Design landing page", status: "In Progress" },
-  { title: "Update documentation", status: "Completed" },
-  { title: "Team sync meeting", status: "Upcoming" },
-  { title: "Review pull requests", status: "Upcoming" },
+export const dashboardTasks: {
+  title: string;
+  shortTitle: string;
+  status: TaskStatus;
+}[] = [
+  { title: "Design landing page", shortTitle: "Design landing page", status: "In Progress" },
+  { title: "Update documentation", shortTitle: "Update docs", status: "Completed" },
+  { title: "Team sync meeting", shortTitle: "Team sync", status: "Upcoming" },
+  { title: "Review pull requests", shortTitle: "Review PRs", status: "Upcoming" },
 ];

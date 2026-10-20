@@ -49,7 +49,7 @@ export function FormField({
     .filter(Boolean)
     .join(" ");
   return (
-    <div className={`flex flex-col gap-1.5 ${className}`}>
+    <div className={`flex flex-col gap-1 md:gap-1.5 ${className}`}>
       <label htmlFor={id} className={labelClass}>
         {label}
         {required ? <span aria-hidden="true"> *</span> : null}

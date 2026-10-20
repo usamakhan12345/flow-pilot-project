@@ -1,6 +1,8 @@
 export type Testimonial = {
   id: string;
   quote: string;
+  /** Shorter copy shown on mobile (Figma 2:1068). */
+  shortQuote?: string;
   name: string;
   role: string;
   rating: number;
@@ -12,6 +14,8 @@ export const testimonials: Testimonial[] = [
     id: "jessica",
     quote:
       "FlowPilot has completely changed how our team works. We’re more organized, more productive, and spend less time on repetitive tasks.",
+    shortQuote:
+      "FlowPilot has completely changed how our team works. We’re more organized and spend less time on repetitive tasks.",
     name: "Jessica Lee",
     role: "Product Manager, Acme Inc.",
     rating: 5,

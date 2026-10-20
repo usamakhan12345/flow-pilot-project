@@ -32,7 +32,7 @@ export const featureTabs: FeatureTab[] = [
   {
     id: "collaborate",
     label: "Collaborate",
-    title: "Keep everyone on the same page",
+    title: "Keep everyone aligned",
     description: "Shared boards and real-time updates keep your whole team aligned.",
     stat: "92%",
     statLabel: "Teams report better alignment",

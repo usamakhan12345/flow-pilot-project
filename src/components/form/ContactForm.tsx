@@ -222,17 +222,17 @@ export function ContactForm() {
         describedBy="contact-message-count"
       >
         {(aria) => (
-          <div className="relative pb-1.5">
+          <div className="relative md:pb-1.5">
             <textarea
               {...aria}
               rows={3}
               placeholder="Tell us about your needs…"
-              className={`${controlClass} block h-[78px] resize-none px-[13px] py-[13px] leading-6 text-ink placeholder:text-placeholder`}
+              className={`${controlClass} block h-[94px] resize-none md:h-[78px] px-[13px] py-[13px] leading-6 text-ink placeholder:text-placeholder`}
               {...register("message", rules.message)}
             />
             <span
               id="contact-message-count"
-              className={`pointer-events-none absolute right-3 bottom-[10px] text-micro ${
+              className={`pointer-events-none absolute -top-[21.5px] right-0 text-micro md:top-auto md:right-3 md:bottom-[10px] ${
                 overLimit ? "font-semibold text-danger" : "text-muted"
               }`}
             >
@@ -243,7 +243,7 @@ export function ContactForm() {
       </FormField>
 
       <div className="flex flex-col gap-1.5">
-        <div className="flex items-start gap-1.5">
+        <div className="flex items-start gap-2 md:min-h-[21.5px] md:gap-1.5">
           <span className="relative mt-[3px] flex size-3.5 shrink-0 md:size-4">
             <input
               id="contact-terms"
@@ -251,13 +251,15 @@ export function ContactForm() {
               aria-required="true"
               aria-invalid={Boolean(errors.terms)}
               aria-describedby={errors.terms ? "contact-terms-error" : undefined}
-              className="peer size-full appearance-none rounded-[3px] border border-line bg-white checked:border-brand checked:bg-brand aria-[invalid=true]:border-danger"
+              className="peer size-full appearance-none max-md:rounded-[4px] rounded-[3px] border border-line bg-white max-md:border-placeholder checked:border-brand checked:bg-brand aria-[invalid=true]:border-danger"
               {...register("terms", rules.terms)}
             />
             <TickIcon className="pointer-events-none absolute -inset-px hidden size-[calc(100%+2px)] text-white peer-checked:block" />
           </span>
           <label htmlFor="contact-terms" className="text-micro text-muted">
-            I agree to the Terms of Service and Privacy Policy
+            I agree to the{" "}
+            <span className="max-md:text-brand">Terms of Service</span> and{" "}
+            <span className="max-md:text-brand">Privacy Policy</span>
             <span aria-hidden="true"> *</span>
           </label>
         </div>
@@ -268,7 +270,7 @@ export function ContactForm() {
         type="submit"
         disabled={isSubmitting}
         aria-disabled={isSubmitting}
-        className="h-[42px] w-full text-body-sm md:h-[43px]"
+        className="h-[42px] w-full text-body-sm max-md:mt-2 md:h-[43px]"
       >
         {isSubmitting ? "Sending…" : "Send Message"}
       </Button>

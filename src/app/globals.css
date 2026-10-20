@@ -34,7 +34,8 @@
 
   /* Mobile menu uses a different palette in Figma (node 16:584) */
   --color-menu-ink: #1e293b;
-  --color-menu-icon: #64748b;
+  --color-menu-icon: #94a3b8;
+  --color-menu-close: #334155;
   --color-menu-line: #e2e8f0;
 
   --radius-badge: 14px;

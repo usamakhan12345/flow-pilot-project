@@ -60,13 +60,8 @@ export function ChevronLeftIcon(props: IconProps) {
 
 export function MenuIcon(props: IconProps) {
   return (
-    <svg viewBox="0 0 26 24" fill="none" {...base} {...props}>
-      <path
-        d="M4 6.5h18M4 12h18M4 17.5h18"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+    <svg viewBox="0 0 18 17" fill="none" {...base} {...props}>
+      <path d="M0 1.5h18M0 8h18M0 14.5h18" stroke="currentColor" strokeWidth="3" />
     </svg>
   );
 }
@@ -75,9 +70,9 @@ export function CloseIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 20 20" fill="none" {...base} {...props}>
       <path
-        d="m4.5 4.5 11 11m0-11-11 11"
+        d="m5 5 10 10m0-10L5 15"
         stroke="currentColor"
-        strokeWidth="1.75"
+        strokeWidth="2"
         strokeLinecap="round"
       />
     </svg>
@@ -116,6 +111,54 @@ export function LogoMark(props: IconProps) {
   );
 }
 
+/** Narrow outlined vertical bar used by the mobile footer logo (Figma 2:1075). */
+export function LogoBarVertical(props: IconProps) {
+  return (
+    <svg viewBox="0 0 5 13" fill="none" {...base} {...props}>
+      <rect x="0.5" y="0.5" width="4" height="12" stroke="currentColor" />
+      <path d="M1.5 3h2M1.5 5h2M1.5 7h2M1.5 9h2" stroke="currentColor" strokeWidth="0.8" />
+    </svg>
+  );
+}
+
+/** Flat 17x5 bar used by the header and mobile-menu logos (Figma glyph). */
+export function LogoBar(props: IconProps) {
+  return (
+    <svg viewBox="0 0 17 5" fill="currentColor" {...base} {...props}>
+      <rect width="17" height="5" />
+    </svg>
+  );
+}
+
+/** Bold carousel arrows (Figma glyphs, about 7x10 with a 2.3px stroke). */
+export function ArrowLeftIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 18 18" fill="none" {...base} {...props}>
+      <path
+        d="M10.6 5.2 6.7 9l3.9 3.8"
+        stroke="currentColor"
+        strokeWidth="2.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function ArrowRightIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 18 18" fill="none" {...base} {...props}>
+      <path
+        d="m7.4 5.2 3.9 3.8-3.9 3.8"
+        stroke="currentColor"
+        strokeWidth="2.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 /* ---- Feature icons (coloured 44x44 tiles, white glyph) ---- */
 
 export function PlanningIcon(props: IconProps) {
@@ -124,6 +167,19 @@ export function PlanningIcon(props: IconProps) {
       <rect width="44" height="44" rx="12" fill="#4F6BFF" />
       <path
         d="M28.798 28.057H15.202V14.443h13.596v13.614Zm-.68-.681V15.124H15.882v12.252h12.236Zm-1.694-1.644h-8.848v-8.915h8.848v8.915Z"
+        fill="#fff"
+      />
+    </svg>
+  );
+}
+
+/** Mobile variant of the planning tile: narrow vertical bar glyph (Figma 2:1027). */
+export function PlanningBarIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 44 44" fill="none" {...base} {...props}>
+      <rect width="44" height="44" rx="12" fill="#4F6BFF" />
+      <path
+        d="M24.8555 30.6797H19.1445V11.8203H24.8555V30.6797M20.6719 28.8203V29.3516H23.3281V28.8203H21.5435L23.3281 27.7661V27.2266H20.6719V27.7578H22.4648L20.6719 28.8203M20.6719 24.5703V26.6953H23.3281V24.5703H20.6719M22.7969 26.1641H21.2031V25.1016H22.7969V26.1641M20.6719 21.3828V23.5078H23.3281V21.3828H21.7344V22.4453H22.2656V21.9141H22.7969V22.9766H21.2031V21.3828H20.6719M20.6719 20.3203V20.8516H23.3281V18.9922H22.7969V20.3203H20.6719M20.6719 19.2578V19.7891H22.2656V18.4609H23.3281V17.9297H20.6719V18.4609H21.7344V19.2578H20.6719M21.7344 16.8672H21.2031V16.0703H21.7344V16.8672M20.6719 15.5391V17.3984H23.3281V16.8672H22.2656V15.5391H20.6719M20.6719 14.4766V15.0078H23.3281V14.4766H22.1328V13.6797H23.3281V13.1484H20.6719V13.6797H21.6016V14.4766H20.6719"
         fill="#fff"
       />
     </svg>

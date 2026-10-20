@@ -6,18 +6,21 @@ export function TrustedBy() {
   return (
     <Section
       aria-labelledby="trusted-title"
-      className="pt-9 pb-8 md:pt-[55px] md:pb-14"
+      className="pt-9 pb-2 md:pt-[55px] md:pb-14"
     >
-      <Container className="flex flex-col items-center gap-5 md:gap-8">
+      <Container className="flex flex-col items-center md:gap-8">
+        {/* Figma mobile (2:1007) has no heading: keep it for assistive tech only. */}
         <p
           id="trusted-title"
-          className="text-body-sm font-semibold text-muted"
+          className="sr-only text-body-sm font-semibold text-muted md:not-sr-only"
         >
           Trusted by modern teams
         </p>
-        <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-[13px] font-semibold text-logo-gray md:gap-x-10 md:text-[22px]/[33px] lg:gap-x-16 xl:gap-x-24">
-          {trustedCompanies.map((name) => (
-            <li key={name}>{name}</li>
+        <ul className="flex flex-wrap items-center justify-center gap-x-0 gap-y-3 text-[13px]/[20px] font-semibold text-logo-gray max-md:*:text-center md:gap-x-10 md:text-[22px]/[33px] lg:gap-x-16 xl:gap-x-24">
+          {trustedCompanies.map(({ name, mobileClass }) => (
+            <li key={name} className={mobileClass}>
+              {name}
+            </li>
           ))}
         </ul>
       </Container>

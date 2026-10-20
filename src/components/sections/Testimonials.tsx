@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ComponentPropsWithoutRef, type UIEvent } from "react";
 import { testimonials as defaultTestimonials, type Testimonial } from "@/data/testimonials";
-import { ChevronLeftIcon, ChevronRightIcon, StarIcon } from "@/components/icons";
+import { ArrowLeftIcon, ArrowRightIcon, StarIcon } from "@/components/icons";
 import { Container } from "@/components/ui/Container";
 import { IconButton } from "@/components/ui/IconButton";
 import { Section } from "@/components/ui/Section";
@@ -29,37 +29,44 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
-function Dots({
-  count,
-  active,
-  onSelect,
+function Slide({
+  item,
   className = "",
-}: {
-  count: number;
-  active: number;
-  onSelect: (index: number) => void;
-  className?: string;
-}) {
+  ...props
+}: { item: Testimonial; className?: string } & Omit<
+  ComponentPropsWithoutRef<"div">,
+  "className"
+>) {
   return (
-    <div className={`items-center justify-center gap-1 ${className}`}>
-      {Array.from({ length: count }, (_, i) => (
-        <button
-          key={i}
-          type="button"
-          aria-label={`Show testimonial ${i + 1} of ${count}`}
-          aria-current={i === active ? "true" : undefined}
-          onClick={() => onSelect(i)}
-          className="group flex size-6 items-center justify-center rounded-full"
-        >
-          <span
-            className={`h-2 rounded-full transition-all duration-200 motion-reduce:transition-none ${
-              i === active
-                ? "w-6 bg-brand-gradient"
-                : "w-2 bg-line group-hover:bg-brand/50"
-            }`}
-          />
-        </button>
-      ))}
+    <div
+      role="group"
+      aria-roledescription="slide"
+      className={`relative flex min-h-[220px] flex-col justify-between rounded-card-lg bg-soft-gradient p-5 md:border md:border-line md:p-[33px] xl:bg-white xl:bg-none xl:shadow-card-md ${className}`}
+      {...props}
+    >
+      <span
+        aria-hidden="true"
+        className="absolute top-[34px] left-5 -translate-y-1/2 text-[44px]/[44px] font-bold text-brand-2 md:top-[43px] md:left-6 md:text-[54px]/[54px]"
+      >
+        &ldquo;
+      </span>
+      <blockquote className="pt-10 pb-6 text-sm/[19px] font-medium text-ink md:pt-[7px] md:pl-7 md:text-lead/[24.3px]">
+        {item.shortQuote ? (
+          <>
+            <span className="md:hidden">{item.shortQuote}</span>
+            <span className="hidden md:inline">{item.quote}</span>
+          </>
+        ) : (
+          item.quote
+        )}
+      </blockquote>
+      <div className="flex items-center justify-between gap-4 md:pl-7">
+        <div>
+          <p className="text-caption font-bold text-ink md:text-body-sm">{item.name}</p>
+          <p className="text-[10px]/[15px] text-muted md:text-micro">{item.role}</p>
+        </div>
+        <Stars rating={item.rating} />
+      </div>
     </div>
   );
 }
@@ -72,14 +79,23 @@ export function Testimonials({ items = defaultTestimonials }: TestimonialsProps)
   const prev = () => setIndex((i) => (i - 1 + count) % count);
   const next = () => setIndex((i) => (i + 1) % count);
 
+  // Mobile: slides sit at k * (scrollWidth - clientWidth) / (count - 1).
+  const onSwipeScroll = (e: UIEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
+    const max = el.scrollWidth - el.clientWidth;
+    if (count < 2 || max <= 0) return;
+    const i = Math.round((el.scrollLeft / max) * (count - 1));
+    setIndex(Math.min(count - 1, Math.max(0, i)));
+  };
+
   return (
     <Section
       id="testimonials"
       aria-roledescription="carousel"
       aria-labelledby="testimonials-title"
-      className="py-12 md:py-20"
+      className="pb-[25px] md:py-20"
     >
-      <Container className="flex flex-col gap-8 xl:flex-row xl:items-center xl:justify-between">
+      <Container className="flex flex-col gap-[19px] md:gap-8 xl:flex-row xl:items-center xl:justify-between xl:gap-0">
         <SectionHeading
           id="testimonials-title"
           align="left"
@@ -88,63 +104,53 @@ export function Testimonials({ items = defaultTestimonials }: TestimonialsProps)
           subtitle="See how FlowPilot helps teams work smarter and save time."
           className="gap-2 xl:w-[468.27px] xl:shrink-0"
           eyebrowClassName="text-body-sm tracking-[0.325px]"
-          titleClassName="text-[26px]/[32px] md:text-[36px]/[45px]"
-          subtitleClassName="mt-[3px] text-body-lg"
+          titleClassName="text-[26px]/[45px] md:text-[36px]/[45px]"
+          subtitleClassName="mt-[20.5px] text-body-lg md:mt-[3px]"
         />
 
-        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-y-5 xl:flex xl:flex-1 xl:justify-end xl:gap-3.5">
+        <p role="status" aria-live="polite" className="sr-only">
+          Slide {index + 1} of {count}
+        </p>
+
+        {/* Mobile: touch-swipeable scroll-snap slider, one card per view. */}
+        <div
+          data-testid="testimonials-swipe"
+          tabIndex={0}
+          aria-label="Testimonials"
+          onScroll={onSwipeScroll}
+          className="-mx-5 flex snap-x snap-mandatory scroll-px-5 gap-5 overflow-x-auto px-5 [scrollbar-width:none] focus-visible:outline-2 focus-visible:outline-brand md:hidden [&::-webkit-scrollbar]:hidden"
+        >
+          {items.map((item, i) => (
+            <Slide
+              key={item.id}
+              item={item}
+              aria-label={`${i + 1} of ${count}`}
+              className="w-full shrink-0 snap-start"
+            />
+          ))}
+        </div>
+
+        {/* md and up: prev/next arrows. */}
+        <div className="hidden grid-cols-[auto_1fr_auto] items-center gap-y-5 md:grid xl:flex xl:flex-1 xl:justify-end xl:gap-3.5">
           <IconButton aria-label="Previous testimonial" onClick={prev}>
-            <ChevronLeftIcon className="size-[18px]" />
+            <ArrowLeftIcon className="size-[18px]" />
           </IconButton>
 
           <div className="relative order-first col-span-3 xl:order-none xl:col-span-1 xl:w-[557px] xl:shrink-0">
-            <div
+            <Slide
               key={current.id}
-              role="group"
-              aria-roledescription="slide"
+              item={current}
               aria-label={`${index + 1} of ${count}`}
-              aria-live="polite"
-              className="relative flex min-h-[220px] flex-col justify-between rounded-card-lg border border-line bg-soft-gradient p-5 motion-safe:animate-fade-in md:p-[33px] xl:bg-white xl:bg-none xl:shadow-card-md"
-            >
-              <span
-                aria-hidden="true"
-                className="absolute top-8 left-5 -translate-y-1/2 text-[44px]/[44px] font-bold text-brand-2 md:top-[43px] md:left-6 md:text-[54px]/[54px]"
-              >
-                &ldquo;
-              </span>
-              <blockquote className="pt-[7px] pb-6 pl-7 text-sm/[19px] font-medium text-ink md:text-lead/[24.3px]">
-                {current.quote}
-              </blockquote>
-              <div className="flex items-center justify-between gap-4 pl-7">
-                <div>
-                  <p className="text-caption font-bold text-ink md:text-body-sm">
-                    {current.name}
-                  </p>
-                  <p className="text-[10px]/[15px] text-muted md:text-micro">
-                    {current.role}
-                  </p>
-                </div>
-                <Stars rating={current.rating} />
-              </div>
-            </div>
-
-            <Dots
-              count={count}
-              active={index}
-              onSelect={setIndex}
-              className="absolute top-full left-0 mt-4 hidden w-full xl:flex"
+              className="motion-safe:animate-fade-in"
             />
           </div>
 
-          <Dots
-            count={count}
-            active={index}
-            onSelect={setIndex}
-            className="flex xl:hidden"
-          />
-
-          <IconButton aria-label="Next testimonial" onClick={next}>
-            <ChevronRightIcon className="size-[18px]" />
+          <IconButton
+            aria-label="Next testimonial"
+            onClick={next}
+            className="col-start-3 xl:col-start-auto"
+          >
+            <ArrowRightIcon className="size-[18px]" />
           </IconButton>
         </div>
       </Container>
