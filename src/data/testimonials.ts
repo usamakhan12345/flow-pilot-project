@@ -1,5 +1,7 @@
 export type Testimonial = {
   id: string;
+  /** May contain 
+; line breaks are honoured from md up (Figma hard-wraps the desktop quote). */
   quote: string;
   /** Shorter copy shown on mobile (Figma 2:1068). */
   shortQuote?: string;
@@ -13,7 +15,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "jessica",
     quote:
-      "FlowPilot has completely changed how our team works. We’re more organized, more productive, and spend less time on repetitive tasks.",
+      "FlowPilot has completely changed how our team works. We’re\nmore organized, more productive, and spend less time on\nrepetitive tasks.",
     shortQuote:
       "FlowPilot has completely changed how our team works. We’re more organized and spend less time on repetitive tasks.",
     name: "Jessica Lee",

@@ -119,3 +119,8 @@ body {
   outline: 2px solid var(--color-brand);
   outline-offset: 2px;
 }
+
+/* Pointer cursor for every clickable control (buttons, tabs, slider arrows, links, select) */
+:where(button, [role="button"], [role="tab"], a[href], select, summary, label[for], input[type="checkbox"], input[type="radio"]):not(:disabled) {
+  cursor: pointer;
+}

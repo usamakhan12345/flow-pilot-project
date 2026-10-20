@@ -50,7 +50,7 @@ function Slide({
       >
         &ldquo;
       </span>
-      <blockquote className="pt-10 pb-6 text-sm/[19px] font-medium text-ink md:pt-[7px] md:pl-7 md:text-lead/[24.3px]">
+      <blockquote className="pt-10 pb-6 text-sm/[19px] font-medium text-ink md:pt-[7px] md:pl-7 md:text-lead/[24.3px] md:whitespace-pre-line">
         {item.shortQuote ? (
           <>
             <span className="md:hidden">{item.shortQuote}</span>

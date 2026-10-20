@@ -6,11 +6,13 @@ export function Footer() {
   return (
     <footer className="border-t border-footer-line bg-white pt-6 pb-4 md:pt-[49px] md:pb-12">
       <Container className="flex flex-wrap items-center justify-between gap-x-4 gap-y-[26px] md:gap-y-4">
-        <Logo
-          mark="slant"
-          textClassName="text-[13px] tracking-normal"
-          markClassName="h-[6.6px] w-[13px]"
-        />
+        <a href="#top" aria-label="FlowPilot home" className="rounded-sm">
+          <Logo
+            mark="slant"
+            textClassName="text-[13px] tracking-normal"
+            markClassName="h-[6.6px] w-[13px]"
+          />
+        </a>
         <p className="text-micro text-muted md:text-body-sm">
           <span className="md:hidden">&copy; 2025 FlowPilot, Inc.</span>
           <span className="hidden md:inline">

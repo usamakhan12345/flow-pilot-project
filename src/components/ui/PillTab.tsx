@@ -16,7 +16,7 @@ export function PillTab({
 }: PillTabProps) {
   const state = selected
     ? "bg-brand-gradient text-white"
-    : `bg-white text-ink hover:bg-surface-chip ${bordered ? "border border-line" : ""}`;
+    : `bg-white text-ink hover:text-brand hover:shadow-[0_2px_8px_rgba(29,42,87,0.12)] ${bordered ? "border border-line" : ""}`;
   return (
     <button
       type={type}

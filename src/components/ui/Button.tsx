@@ -27,7 +27,7 @@ const variants: Record<Variant, string> = {
   primary:
     "bg-brand-gradient text-white shadow-btn hover:brightness-110 active:brightness-95",
   outline:
-    "border border-line bg-white text-ink hover:border-brand/50 hover:bg-surface-chip active:bg-surface-nav",
+    "border border-line bg-white text-ink hover:border-brand/50 hover:text-brand hover:shadow-[0_2px_8px_rgba(29,42,87,0.12)] active:bg-surface-nav",
 };
 
 export function Button(props: ButtonProps) {
