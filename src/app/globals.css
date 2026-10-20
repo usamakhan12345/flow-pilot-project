@@ -1,26 +1,120 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/*
+ * FlowPilot design tokens (extracted from Figma file WAHeIX5DCB0FAYZ2lOcr6d).
+ * Colors/radii/shadows/type are exposed as Tailwind utilities, e.g. text-ink,
+ * bg-surface-blue, rounded-btn, shadow-card-lg, text-body-sm.
+ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-jakarta: var(--font-jakarta-sans), var(--font-inter), sans-serif;
+
+  --color-ink: #101828;
+  --color-muted: #667085;
+  --color-subtle: #98a2b3;
+  --color-logo-gray: #7a879b;
+  --color-brand: #2f5bff;
+  --color-brand-2: #7b4dff;
+  --color-violet: #8a5cff;
+  --color-orange: #ff9f43;
+  --color-green: #22b573;
+  --color-star: #f7b500;
+  --color-line: #dce3f0;
+  --color-line-soft: #eef1f6;
+  --color-footer-line: #eef1f5;
+  --color-surface-blue: #eef3ff;
+  --color-surface-nav: #eaf0ff;
+  --color-surface-chip: #f1f5ff;
+  --color-surface-track: #eef2ff;
+  --color-surface-side: #f6f8fc;
+  --color-surface-stat: #fbfcfe;
+  --color-placeholder: #6b7280;
+  /* Not in Figma: error state colour (assumption, passes AA on white) */
+  --color-danger: #d92d20;
+
+  /* Mobile menu uses a different palette in Figma (node 16:584) */
+  --color-menu-ink: #1e293b;
+  --color-menu-icon: #64748b;
+  --color-menu-line: #e2e8f0;
+
+  --radius-badge: 14px;
+  --radius-btn: 10px;
+  --radius-input: 8px;
+  --radius-card: 16px;
+  --radius-card-lg: 18px;
+  --radius-banner: 24px;
+
+  --shadow-card-lg: 0 10px 36px 0 rgba(29, 42, 87, 0.1);
+  --shadow-card-md: 0 10px 18px 0 rgba(29, 42, 87, 0.1);
+  --shadow-btn: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  --shadow-menu: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  --animate-fade-in: fade-in 250ms ease-out;
+
+  --text-micro: 11px;
+  --text-micro--line-height: 16.5px;
+  --text-caption: 12px;
+  --text-caption--line-height: 18px;
+  --text-body-sm: 13px;
+  --text-body-sm--line-height: 19.5px;
+  --text-body: 14px;
+  --text-body--line-height: 21px;
+  --text-body-lg: 15px;
+  --text-body-lg--line-height: 22.5px;
+  --text-lead: 18px;
+  --text-lead--line-height: 29.25px;
+  --text-card-title: 16px;
+  --text-card-title--line-height: 24px;
 }
 
-@media (prefers-color-scheme: dark) {
+:root {
+  --header-h: 64px;
+}
+
+@media (min-width: 1024px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --header-h: 80px;
+  }
+}
+
+html {
+  scroll-padding-top: var(--header-h);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Brand gradients (primary buttons, active tabs, progress, banners) */
+@utility bg-brand-gradient {
+  background-image: linear-gradient(to right, #2f5bff, #7b4dff);
+}
+
+@utility bg-soft-gradient {
+  background-image: linear-gradient(to right, #f2f6ff, #f6f1ff);
+}
+
+/* Visible focus for every interactive element */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
 }
