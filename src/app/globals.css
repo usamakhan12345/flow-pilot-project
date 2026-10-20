@@ -124,3 +124,47 @@ body {
 :where(button, [role="button"], [role="tab"], a[href], select, summary, label[for], input[type="checkbox"], input[type="radio"]):not(:disabled) {
   cursor: pointer;
 }
+
+/* Light motion: hero fades in on load, later sections ease up as they scroll into view.
+   Opacity/transform only (no layout shift), and skipped for reduced-motion users. */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main > section:first-child > * {
+    animation: reveal-up 0.6s ease-out both;
+  }
+
+  /* Progressive enhancement: browsers without scroll-driven animations just show the content. */
+  @supports (animation-timeline: view()) {
+    main > section:not(:first-child) > * {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+/* Tab / billing change: new content eases in (applied with motion-safe:) */
+@keyframes tab-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-tab-in {
+  animation: tab-in 0.35s ease-out both;
+}

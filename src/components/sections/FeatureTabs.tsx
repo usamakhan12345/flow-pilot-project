@@ -107,7 +107,7 @@ export function FeatureTabs({ tabs = featureTabs }: FeatureTabsProps) {
                 tab.id === active.id ? (
                   <div
                     key={tab.id}
-                    className="col-start-1 row-start-1 flex flex-col justify-center"
+                    className="col-start-1 row-start-1 flex flex-col justify-center motion-safe:animate-tab-in"
                   >
                     <h3 className="text-card-title/[22px] font-bold text-ink">
                       {tab.title}
@@ -129,7 +129,10 @@ export function FeatureTabs({ tabs = featureTabs }: FeatureTabsProps) {
           </div>
 
           <div className="flex flex-col justify-center ml-[-18.5px] mr-[-12.5px] rounded-card border border-line bg-white px-8 pt-[52.25px] pb-9 md:mx-0 md:p-[33px] xl:min-h-[210px] xl:w-[487px] xl:shrink-0">
-            <p className="mb-[3px] text-[40px]/[40px] font-extrabold text-ink md:mb-1">
+            <p
+              key={active.id}
+              className="mb-[3px] text-[40px]/[40px] font-extrabold text-ink motion-safe:animate-tab-in md:mb-1"
+            >
               {active.stat}
             </p>
             <p className="mb-[10.25px] text-body-sm font-medium text-muted md:mb-6">

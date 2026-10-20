@@ -31,7 +31,10 @@ function PricingCard({
       <div className="flex flex-col gap-1">
         <h3 className="text-card-title font-bold text-ink">{plan.name}</h3>
         <p className="-mb-0.5 flex items-baseline gap-1 lg:mb-0 lg:pt-1">
-          <span className="text-[34px]/[42.5px] font-bold text-ink lg:leading-[34px]">
+          <span
+            key={billing}
+            className="text-[34px]/[42.5px] font-bold text-ink motion-safe:animate-tab-in lg:leading-[34px]"
+          >
             ${plan.price[billing]}
           </span>
           <span className="text-caption font-medium text-muted">
@@ -60,7 +63,7 @@ function PricingCard({
 
   if (featured) {
     return (
-      <article className="flex min-h-[359px] w-[277px] shrink-0 snap-start flex-col justify-between overflow-clip lg:min-h-[302px] rounded-card border-2 border-brand bg-white shadow-card-lg lg:w-auto">
+      <article className="flex min-h-[359px] w-[277px] shrink-0 snap-start flex-col justify-between overflow-clip lg:min-h-[302px] rounded-card border-2 border-brand bg-white shadow-card-lg transition duration-200 ease-out motion-reduce:transition-none hover:-translate-y-1 hover:shadow-card-lg lg:w-auto">
         <div className="flex h-[30px] items-center justify-center bg-brand-gradient text-caption font-bold tracking-[0.3px] text-white">
           Most Popular
         </div>
@@ -72,7 +75,7 @@ function PricingCard({
   }
 
   return (
-    <article className="flex min-h-[359px] w-[277px] shrink-0 snap-start flex-col justify-between rounded-card border border-line lg:min-h-[302px] bg-white p-[25px] lg:w-auto">
+    <article className="flex min-h-[359px] w-[277px] shrink-0 snap-start flex-col justify-between rounded-card border border-line lg:min-h-[302px] bg-white p-[25px] transition duration-200 ease-out motion-reduce:transition-none hover:-translate-y-1 hover:shadow-card-lg hover:border-brand/40 lg:w-auto">
       {details}
     </article>
   );
